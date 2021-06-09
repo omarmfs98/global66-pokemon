@@ -1,0 +1,42 @@
+@import "variables";
+
+.btn {
+    border-radius: 60px;
+    padding: 11px 20px;
+    text-decoration: none;
+    font-weight: bold;    
+    transition: all 0.5s ease;
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    &.is-button {
+        border: none;
+        width: 100%;
+        cursor: pointer;
+    }
+    &--primary {
+        background-color: $color-primary;
+        color: $white;
+        &:active, &:hover {
+            background-color: darken($color-primary, 10%);
+        }
+    }
+
+    &--default {
+        background-color: $star-inactive;
+        color: $white;
+        &:active, &:hover {
+            background-color: darken($star-inactive, 10%);
+        }
+    }
+    &--icon {
+        margin-right: 10px;
+    }
+
+    &--icon, &.is-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

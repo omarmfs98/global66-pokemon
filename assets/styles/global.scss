@@ -1,0 +1,27 @@
+@import "variables";
+@import "buttons";
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700&display=swap');
+
+html, body {
+    font-family: "Lato", sans-serif;
+    background-color: $bg-color;
+    margin: 0;
+}
+
+.typography {
+    &-h1 {
+        font-size: $h1;
+        font-weight: normal;
+    }
+    
+    &-h2 {
+        font-size: $h2;
+        font-weight: normal;
+    }
+
+    &-body1 {
+        font-size: $body1;
+        font-weight: normal;
+    }
+}
