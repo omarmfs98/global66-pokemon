@@ -160,6 +160,9 @@ export default class Modal extends Vue {
     background-color: $white;
     border-radius: 5px;
     overflow: hidden;
+    @media (max-width: 768px) {
+      width: 90%;
+    }
   }
   &__loading {
     padding: 20px;
@@ -171,11 +174,17 @@ export default class Modal extends Vue {
   }
   &__body {
     padding: 20px 40px;
+    @media (max-width: 768px) {
+      padding: 20px;
+    }
   }
   &__footer {
     padding: 0 40px 30px 40px;
     display: flex;
     justify-content: space-between;
+    @media (max-width: 768px) {
+      padding: 0 20px 20px 20px;
+    }
   }
   &__close {
     position: absolute;
