@@ -9,6 +9,7 @@ En este [Link](https://global66.omarflorez.me/) podrá ver la aplicación desple
 
 ## Loader veloz
 Es posible que no logre ver el loader, y es por que uso SSR, este carga muy rapido y solo se podria apreciar si desde el lado del server se esta ejecutando una request con un tiempo de respuesta algo considerable, por eso agregue en una ruta aparte para que pueda verlo con la animación que hice: [Ver Loading](https://global66.omarflorez.me/loading)
+
 ## Build Setup
 
 ```bash
