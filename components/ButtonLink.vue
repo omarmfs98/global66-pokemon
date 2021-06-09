@@ -10,7 +10,7 @@
       :class="'btn--' + variant"
       @click="action()"
     >
-      <img v-if="icon !== 0" :src="icon" alt="Icon" class="btn--icon" />
+      <img v-if="icon !== ''" :src="icon" alt="Icon" class="btn--icon" />
       {{ title }}
     </button>
   </div>

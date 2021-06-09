@@ -19,54 +19,36 @@
 
 <script lang="ts">
 import { Pokemon } from 'global66-pokemon'
-import Vue from 'vue'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-export default Vue.extend({
-  props: {
-    pokemons: {
-      required: true,
-      type: Array as () => Array<Pokemon>,
-    },
-    setData: {
-      required: true,
-      type: Function,
-    },
-    isShowAll: {
-      required: true,
-      type: Boolean,
-    },
-    handleShowData: {
-      required: true,
-      type: Function,
-    },
-  },
-  data() {
-    return {
-      query: '',
-      initialResult: this.pokemons,
+@Component
+export default class Search extends Vue {
+  @Prop({ required: true }) readonly pokemons!: Array<Pokemon>
+  @Prop({ required: true }) readonly setData!: Function
+  @Prop({ required: true }) readonly isShowAll!: Boolean
+  @Prop({ required: true }) readonly handleShowData!: Function
+
+  query: string = ''
+  initialResult: Array<Pokemon> = this.pokemons
+
+  search(): void {
+    if (this.query !== '') {
+      this.setData(
+        this.isShowAll
+          ? this.initialResult.filter(({ name }) => name.includes(this.query))
+          : this.initialResult.filter(
+              ({ name, isFavorite }) => name.includes(this.query) && isFavorite
+            )
+      )
+    } else {
+      this.setData(
+        this.isShowAll
+          ? this.initialResult
+          : this.initialResult.filter(({ isFavorite }) => isFavorite)
+      )
     }
-  },
-  methods: {
-    search(): void {
-      if (this.query !== '') {
-        this.setData(
-          this.isShowAll
-            ? this.initialResult.filter(({ name }) => name.includes(this.query))
-            : this.initialResult.filter(
-                ({ name, isFavorite }) =>
-                  name.includes(this.query) && isFavorite
-              )
-        )
-      } else {
-        this.setData(
-          this.isShowAll
-            ? this.initialResult
-            : this.initialResult.filter(({ isFavorite }) => isFavorite)
-        )
-      }
-    },
-  },
-})
+  }
+}
 </script>
 
 <style scoped lang="scss">

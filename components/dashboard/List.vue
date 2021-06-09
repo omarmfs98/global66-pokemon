@@ -2,7 +2,12 @@
   <div class="pokemon-layout">
     <div v-if="pokemons.length > 0">
       <div class="pokemon-list">
-        <div v-for="(pokemon, key) in pokemons" :key="key" class="pokemon-item">
+        <div
+          v-for="(pokemon, key) in pokemons"
+          :key="key"
+          class="pokemon-item"
+          @click="getInfo(pokemon)"
+        >
           <span class="pokemon-item__name">{{ pokemon.name }}</span>
           <span
             class="pokemon-item__is-fav"
@@ -24,6 +29,12 @@
           </span>
         </div>
       </div>
+      <LazyDashboardModal
+        v-if="showModal"
+        :pokemon="selectedPokemon"
+        :handle-modal="handleModal"
+        :mark-favorite="markFavorite"
+      />
       <div class="pokemon-layout__filter">
         <div class="pokemon-layout__contentBtn">
           <ButtonLink
@@ -55,47 +66,43 @@
 
 <script lang="ts">
 import { Pokemon } from 'global66-pokemon'
-import Vue from 'vue'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-export default Vue.extend({
-  props: {
-    pokemons: {
-      required: true,
-      type: Array as () => Array<Pokemon>,
-    },
-    setData: {
-      required: true,
-      type: Function,
-    },
-    isShowAll: {
-      required: true,
-      type: Boolean,
-    },
-    handleShowData: {
-      required: true,
-      type: Function,
-    },
-  },
-  data() {
-    return {
-      initialResult: this.pokemons,
-    }
-  },
-  methods: {
-    markFavorite(pokemon: Pokemon): void {
-      pokemon.isFavorite = !pokemon.isFavorite
-      this.isShowAll ? this.showAll() : this.showFavorites()
-    },
-    showAll(): void {
-      this.handleShowData(true)
-      this.setData(this.initialResult)
-    },
-    showFavorites(): void {
-      this.handleShowData(false)
-      this.setData(this.initialResult.filter(({ isFavorite }) => isFavorite))
-    },
-  },
-})
+@Component
+export default class List extends Vue {
+  @Prop({ required: true }) readonly pokemons!: Array<Pokemon>
+  @Prop({ required: true }) readonly setData!: Function
+  @Prop({ required: true }) readonly isShowAll!: Boolean
+  @Prop({ required: true }) readonly handleShowData!: Function
+
+  initialResult: Array<Pokemon> = this.pokemons
+  selectedPokemon?: Object
+  showModal: Boolean = false
+
+  markFavorite(pokemon: Pokemon): void {
+    pokemon.isFavorite = !pokemon.isFavorite
+    this.isShowAll ? this.showAll() : this.showFavorites()
+  }
+
+  showAll(): void {
+    this.handleShowData(true)
+    this.setData(this.initialResult)
+  }
+
+  showFavorites(): void {
+    this.handleShowData(false)
+    this.setData(this.initialResult.filter(({ isFavorite }) => isFavorite))
+  }
+
+  getInfo(pokemon: Pokemon): void {
+    this.selectedPokemon = pokemon
+    this.handleModal()
+  }
+
+  handleModal(): void {
+    this.showModal = !this.showModal
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -165,7 +172,6 @@ export default Vue.extend({
       transition: all 0.3s ease;
       &:hover {
         transform: scale(1.1);
-        color: rgba($star-active, 0.8);
       }
       &.active {
         color: $star-active;

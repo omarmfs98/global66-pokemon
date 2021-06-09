@@ -67,19 +67,19 @@
   </div>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    loading: false,
-  }),
-  methods: {
-    start() {
-      this.loading = true
-    },
-    finish() {
-      this.loading = false
-    },
-  },
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class Loading extends Vue {
+  loading: Boolean = false
+  start() {
+    this.loading = true
+  }
+
+  finish() {
+    this.loading = false
+  }
 }
 </script>
 

@@ -27,7 +27,8 @@
       "@nuxt/types",
       "@nuxtjs/axios",
       "@types/node",
-      "types/global66-pokemon"
+      "types/global66-pokemon",
+      "types/global66-utils"
     ]
   },
   "exclude": [
