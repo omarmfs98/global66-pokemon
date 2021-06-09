@@ -67,6 +67,19 @@
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class Modal extends Vue {
+  head() {
+    return {
+      title: 'Loading | Global 66',
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 @import '@/assets/styles/_variables.scss';
 

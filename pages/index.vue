@@ -14,6 +14,19 @@
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class Modal extends Vue {
+  head() {
+    return {
+      title: 'Global 66',
+    }
+  }
+}
+</script>
+
 <style scoped lang="scss">
 .container {
   margin: 0 auto;

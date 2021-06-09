@@ -39,16 +39,16 @@ export default class ListPokemons extends Vue {
   handleShowData(value: Boolean): void {
     this.isShowAll = value
   }
+
+  head() {
+    return {
+      title: 'Dashboard | Global 66',
+    }
+  }
 }
 </script>
 
 <style lang="scss">
-.container {
-  max-width: 570px;
-  margin: 35px auto 0 auto;
-  padding: 0 20px;
-}
-
 .h-screen {
   min-height: calc(100vh - 35px);
 }
